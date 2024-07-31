@@ -1,11 +1,12 @@
 package com.haribo.auth_service.auth.domain;
 
-import com.haribo.auth_service.common.entity.BaseTimeEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.haribo.auth_service.global.entity.BaseTimeEntity;
+import com.haribo.auth_service.member.domain.ProfileMember;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -16,8 +17,16 @@ import lombok.*;
 @Table(name = "auth_member")
 public class AuthMember extends BaseTimeEntity {
     @Id
-    private String memberId;
+    @Column(name = "member_uid", length = 48)
+    private String memberUid;
 
-    @Column(nullable = false, unique = true)
-    private String kakaoUid;
+    @Column(name = "kakao_uid", nullable = false, unique = true)
+    private Long kakaoUid;
+
+    @Column(name = "last_login_date", nullable = false)
+    private LocalDateTime lastLoginDate;
+
+    @OneToOne(mappedBy = "authMember", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    @JsonManagedReference
+    private ProfileMember profileMember;
 }
