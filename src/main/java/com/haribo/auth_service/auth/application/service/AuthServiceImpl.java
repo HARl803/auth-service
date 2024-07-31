@@ -81,9 +81,19 @@ public class AuthServiceImpl implements AuthService {
         KakaoMemberDto kakaoMemberDto = registerAndLoginIfNeeded(jsonObj);
 
         logger.info("4. 응답형식(KakaoMemberResponse)에 맞게 리턴하기");
+        AuthMember authMember = kakaoMemberDto.getAuthMember();
+        ProfileMember profileMember = kakaoMemberDto.getProfileMember();
 
-
-        return KakaoMemberResponse.builder().build();
+        return KakaoMemberResponse.builder()
+                .memberUid(authMember.getMemberUid())
+                .kakaoId(authMember.getKakaoUid())
+                .email(profileMember.getEmail())
+                .nickname(profileMember.getNickName())
+                .profileImage(profileMember.getProfileImage())
+                .lastLoginDate(authMember.getLastLoginDate())
+                .profileId(profileMember.getProfileId())
+                .memberStatus(profileMember.getMemberStatus())
+                .build();
     }
 
     private String getKakaoAccessTokem(String code) throws ParseException {
