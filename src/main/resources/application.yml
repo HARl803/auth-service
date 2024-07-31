@@ -1,0 +1,36 @@
+spring:
+  config:
+    import: optional:file:.env[.properties]
+  datasource:
+    driver-class-name: ${SPRING_DATASOURCE_DRIVER_CLASS_NAME}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    url: ${SPRING_DATASOURCE_URL}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: 'true'
+        use_sql_comments: 'true'
+        show_sql: 'true'
+    hibernate:
+      ddl-auto: create
+  application:
+    name: auth-service
+  redis:
+    host: ${SPRING_REDIS_HOST}
+    port: ${SPRING_REDIS_PORT}
+
+jwt:
+  secret: ${JWT_SECRET}
+
+kakao:
+  client:
+    id: ${KAKAO_CLIENT_ID}
+    secret: ${KAKAO_CLIENT_SECRET}
+  redirect:
+    login: ${KAKAO_REDIRECT_LOGIN}
+    logout: ${KAKAO_REDIRECT_LOGOUT}
+
+base:
+  profile-image: ${BASE_PROFILE_IMAGE}
