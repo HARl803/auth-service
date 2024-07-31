@@ -55,7 +55,7 @@ public class AuthServiceImpl implements AuthService {
         String accessToken = getKakaoAccessTokem(code);
 
         logger.info("2. Access Token으로 카카오에 저장된 멤버 정보 가져오기");
-
+        JSONObject jsonObj = getMemberInfoWithToken(accessToken);
 
         logger.info("3. 가져온 정보로 가입 후 로그인 or 로그인을 진행하기");
 
@@ -90,6 +90,24 @@ public class AuthServiceImpl implements AuthService {
         JSONParser jsonParser = new JSONParser();
         JSONObject jsonObj = (JSONObject) jsonParser.parse(response.getBody());
         return (String) jsonObj.get("access_token");
+    }
+
+    private JSONObject getMemberInfoWithToken(String accessToken) throws Exception{
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer " + accessToken);
+        headers.add("Content-type", "application/x-www-form-urlencoded; charset=utf-8");
+
+        RestTemplate rt = new RestTemplate();
+        HttpEntity<MultiValueMap<String, String>> httpEntity = new HttpEntity<>(headers);
+        ResponseEntity<String> response = rt.exchange(
+                KAKAO_API_URI + "/v2/user/me",
+                HttpMethod.POST,
+                httpEntity,
+                String.class
+        );
+
+        JSONParser jsonParser = new JSONParser();
+        return (JSONObject) jsonParser.parse(response.getBody());
     }
 }
 
