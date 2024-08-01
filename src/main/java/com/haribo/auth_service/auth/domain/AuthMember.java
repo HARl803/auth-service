@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -23,6 +22,7 @@ public class AuthMember extends BaseTimeEntity {
     @Column(name = "kakao_uid", nullable = false, unique = true)
     private Long kakaoUid;
 
+    @Setter
     @Column(name = "last_login_date", nullable = false)
     private LocalDateTime lastLoginDate;
 
