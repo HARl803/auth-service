@@ -72,7 +72,7 @@ public class AuthServiceImpl implements AuthService {
             throw new Exception("Failed get authorization code");
 
         logger.info("1. 인가코드로 Access Token 발급하기");
-        String accessToken = getKakaoAccessTokem(code);
+        String accessToken = getKakaoAccessToken(code);
 
         logger.info("2. Access Token으로 카카오에 저장된 멤버 정보 가져오기");
         JSONObject jsonObj = getMemberInfoWithToken(accessToken);
@@ -96,7 +96,7 @@ public class AuthServiceImpl implements AuthService {
                 .build();
     }
 
-    private String getKakaoAccessTokem(String code) throws ParseException {
+    private String getKakaoAccessToken(String code) throws ParseException {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-type", "application/x-www-form-urlencoded");
 
