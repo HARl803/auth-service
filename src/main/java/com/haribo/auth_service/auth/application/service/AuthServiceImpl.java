@@ -147,7 +147,7 @@ public class AuthServiceImpl implements AuthService {
         return (JSONObject) jsonParser.parse(response.getBody());
     }
 
-    private KakaoMemberDto registerAndLoginIfNeeded(JSONObject jsonObj) throws Exception {
+    private KakaoMemberDto registerAndLoginIfNeeded(JSONObject jsonObj){
         JSONObject account = (JSONObject) jsonObj.get("kakao_account");
         JSONObject profile = (JSONObject) account.get("profile");
 
