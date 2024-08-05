@@ -96,6 +96,13 @@ public class AuthServiceImpl implements AuthService {
                 .build();
     }
 
+    @Override
+    public String getKakaoLogoutUrl() {
+        return KAKAO_AUTH_URI + "/oauth/logout"
+                + "?client_id=" + KAKAO_CLIENT_ID
+                + "&logout_redirect_uri=" + KAKAO_REDIRECT_LOGOUT;
+    }
+
     private String getKakaoAccessToken(String code) throws ParseException {
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-type", "application/x-www-form-urlencoded");
