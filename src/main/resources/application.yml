@@ -34,3 +34,4 @@ kakao:
 
 base:
   profile-image: ${BASE_PROFILE_IMAGE}
+  server-domain : ${SERVER_DOMAIN}

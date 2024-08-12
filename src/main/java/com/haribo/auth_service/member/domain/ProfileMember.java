@@ -12,7 +12,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "profile")
+@Table(name = "profile_member")
 public class ProfileMember extends BaseTimeEntity {
     @Id
     @Column(name = "profile_id")
@@ -38,4 +38,7 @@ public class ProfileMember extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "member_status", nullable = false)
     private MemberStatus memberStatus;
+
+    @Column(name = "simple_introduce", nullable = false)
+    private String simpleIntroduce;
 }
