@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,9 @@ import org.springframework.web.servlet.view.RedirectView;
 public class AuthController {
 
     private final AuthService authService;
+
+    @Value("${base.server-domain}")
+    private String SERVER_DOMAIN;
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
@@ -56,8 +60,7 @@ public class AuthController {
     @GetMapping("/redirect-kakaologout")
     public RedirectView kakalogout() {
         logger.info("kakao-logout 후에 진행할 로직");
-        // TODO : 배포 후 사이트 주소 넣을 예정
-        return new RedirectView("http://localhost:8080/");
+        return new RedirectView("http://"+SERVER_DOMAIN+ ":8080/");
     }
 
     @GetMapping("/profile")
@@ -79,4 +82,5 @@ public class AuthController {
 
         return ResponseEntity.ok().body(kakaoMemberDto);
     }
+
 }
