@@ -23,7 +23,7 @@ public class AuthController {
     private final AuthService authService;
 
     @Value("${base.server-domain}")
-    private String serverDomain;
+    private String SERVER_DOMAIN;
 
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
@@ -60,8 +60,7 @@ public class AuthController {
     @GetMapping("/redirect-kakaologout")
     public RedirectView kakalogout() {
         logger.info("kakao-logout 후에 진행할 로직");
-        return new RedirectView("http://"+serverDomain+ ":8080/");
-//        return new RedirectView("http://localhost:8080/");
+        return new RedirectView("http://"+SERVER_DOMAIN+ ":8080/");
     }
 
     @GetMapping("/profile")
