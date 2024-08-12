@@ -208,6 +208,7 @@ public class AuthServiceImpl implements AuthService {
                 .name(nickname)
                 .nickName(nickname)
                 .email(email)
+                .simpleIntroduce("")
                 .profileImage(profileImage.equals("null") ? BASE_PROFILE_IMAGE : profileImage)
                 .memberStatus(com.haribo.auth_service.global.enums.MemberStatus.ACTIVE)
                 .build();
@@ -217,3 +218,31 @@ public class AuthServiceImpl implements AuthService {
         return profileMemberRepository.findById(authMember.getMemberUid()).orElseThrow(() -> new RuntimeException("ProfileMember not found"));
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
